@@ -1,0 +1,25 @@
+{
+  "name": "F8",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node_modules/react-native/packager/packager.sh --nonPersistent",
+    "test": "jest"
+  },
+  "dependencies": {
+    "babel-plugin-transform-es2015-block-scoping": "6.15.0",
+    "react": "15.4.1",
+    "react-native": "0.39.0",
+    "react-native-windows": "^0.39.1"
+  },
+  "devDependencies": {
+    "babel-jest": "17.0.2",
+    "babel-preset-react-native": "1.9.0",
+    "jest": "17.0.3",
+    "react-test-renderer": "15.4.1",
+    "rnpm-plugin-windows": "^0.2.3"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}

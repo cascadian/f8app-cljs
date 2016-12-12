@@ -1,0 +1,15 @@
+{
+  "name": "F8",
+  "interface": "om-next",
+  "androidHost": "localhost",
+  "windowsHost": "localhost",
+  "iosHost": "localhost",
+  "envRoots": {
+    "dev": "env/dev",
+    "prod": "env/prod"
+  },
+  "modules": [],
+  "imageDirs": [
+    "images"
+  ]
+}
