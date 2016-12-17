@@ -8,8 +8,17 @@
     "dev": "env/dev",
     "prod": "env/prod"
   },
-  "modules": [],
+  "modules": [
+    "lokka",
+    "lokka-transport-http",
+    "node-fetch"
+  ],
   "imageDirs": [
     "images"
-  ]
+  ],
+  "modulesPlatform": {
+    "windows": [
+      "react-native-windows"
+    ]
+  }
 }

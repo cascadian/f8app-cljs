@@ -1,20 +1,21 @@
 (ns f8.state
   (:require [om.next :as om]
+            [f8.parser :as parser]
             [re-natal.support :as sup]))
 
-(defonce app-state (atom {:app/msg "Hello Clojure in iOS and Android!"}))
+(defonce app-state (atom {:app/msg      "Hello Clojure in iOS and Android!"
+                          :reload-count 0
+                          :nav/state    {:nav/index       0
+                                         :nav/key-counter 0
+                                         :nav/routes      [{:key 0 :tab :schedule}]}}))
 
-(defmulti read om/dispatch)
-(defmethod read :default
-           [{:keys [state]} k _]
-           (let [st @state]
-                (if-let [[_ v] (find st k)]
-                        {:value v}
-                        {:value :not-found})))
+
+(defonce shared-state (atom {:platform-specific-components {}}))
 
 (defonce reconciler
          (om/reconciler
            {:state        app-state
-            :parser       (om/parser {:read read})
+            :shared-fn    (fn [_] @shared-state)
+            :parser       parser/parse-fn
             :root-render  sup/root-render
             :root-unmount sup/root-unmount}))
