@@ -5,9 +5,15 @@
                       :url  "http://www.eclipse.org/legal/epl-v10.html"}
             :dependencies [[org.clojure/clojure "1.9.0-alpha10"]
                            [org.clojure/clojurescript "1.9.198"]
-                           [org.omcljs/om "1.0.0-alpha41" :exclusions [cljsjs/react cljsjs/react-dom]]]
+                           [org.clojure/core.async "0.2.395"
+                            :exclusions [org.clojure/tools.reader]]
+                           [org.omcljs/om "1.0.0-alpha41" :exclusions [cljsjs/react cljsjs/react-dom]]
+                           [org.routom/routom "0.1.0-alpha9"]
+                           [datascript "0.15.5"]]
+
             :plugins [[lein-cljsbuild "1.1.4"]
-                      [lein-figwheel "0.5.8"]]
+                      [lein-figwheel "0.5.8"]
+                      [lein-kibit "0.1.3"]]
             :clean-targets ["target/" "index.ios.js" "index.android.js"]
             :aliases {"prod-build" ^{:doc "Recompile code with prod profile."}
                                    ["do" "clean"
@@ -30,7 +36,7 @@
                                                                      :output-dir    "target/android"
                                                                      :optimizations :none}}
                                                      {:id           "windows"
-                                                      :source-paths ["src" "env/dev"]
+                                                      :source-paths ["src" "env/dev" "checkouts/routom/src"]
                                                       :figwheel     true
                                                       :compiler     {:output-to     "target/windows/not-used.js"
                                                                      :main          "env.windows.main"

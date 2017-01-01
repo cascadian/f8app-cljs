@@ -32,6 +32,7 @@ namespace F8
                 return new List<IReactPackage>
                 {
                     new MainReactPackage(),
+                    new BV.LinearGradient.LinearGradientPackage(),
                 };
             }
         }

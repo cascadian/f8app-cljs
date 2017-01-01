@@ -5,7 +5,7 @@
 
 (def ActivityIndicatorIOS (.-ActivityIndicatorIOS ReactNative))
 (def activity-indicator-ios (partial create-element ActivityIndicatorIOS))
-(def TabBarIOS (js/require "TabBarIOS"))
+(def TabBarIOS (.-TabBarIOS ReactNative))
 (def tab-bar-ios (partial create-element TabBarIOS))
-(def TabBarItemIOS (js/require "TabBarItemIOS"))
+(def TabBarItemIOS (.-TabBarItemIOS ReactNative))
 (def tab-bar-item-ios (partial create-element TabBarItemIOS))

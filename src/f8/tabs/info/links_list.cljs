@@ -27,13 +27,16 @@
           {:separatorStyle (styles :separator)}
           rows)))))
 
-(def links-list (om/factory LinksList))
+(def links-list (om/factory LinksList {:keyfn :db/id}))
 
 (defui Row
+  om/IQuery
+  (query [this]
+    [:db/id :page/id :page/title :page/url :page/logo])
   Object
   (render [this]
     (let [{:keys [link]} (om/props this)
-          {:keys [logo title url onPress]} link
+          {:keys [page/logo page/title page/url onPress]} link
           img (and logo (image
                           {:style (styles :picture)
                            :source {:uri logo}}))]

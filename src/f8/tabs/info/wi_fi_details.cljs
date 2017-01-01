@@ -1,5 +1,5 @@
 (ns f8.tabs.info.wi-fi-details
-  (:require [om.next :as om :refer [defui]]
+  (:require [om.next :as om :refer-macros [defui]]
             [react-native.components :refer [view]]
             [react-native.api :refer [Platform android? create-style-sheet]]
             [f8.common.items-with-separator :refer [items-with-separator]]
@@ -15,11 +15,14 @@
 (declare styles row)
 
 (defui WiFiDetails
+  om/IQuery
+  (query [this]
+    [:db/id :config/wifiNetwork :config/wifiPassword])
   Object
   (initLocalState [this]
     {:copied false})
   (render [this]
-    (let [{:keys [network password]} (om/props this)
+    (let [{:keys [config/network config/password]} (om/props this)
           caption (if (om/get-state this :copied) "Copied!" "Copy password")]
       (section
         {:title "WiFi"

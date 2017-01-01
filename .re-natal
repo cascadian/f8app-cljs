@@ -9,9 +9,7 @@
     "prod": "env/prod"
   },
   "modules": [
-    "lokka",
-    "lokka-transport-http",
-    "node-fetch"
+    "react-native-linear-gradient"
   ],
   "imageDirs": [
     "images"
