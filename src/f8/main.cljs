@@ -5,7 +5,8 @@
             [f8.f8-navigator :refer [f8-navigator]]
             [f8.tabs.info.f8-info-view :as info-view]
             [f8.tabs.info.app-module :as info-module]
-            [f8.protocols :as protos]
+            [routom.ajax :as ajax]
+            [f8.env :refer [env]]
             [f8.state :as state])
   (:import [goog.net XhrManager]))
 
@@ -56,7 +57,7 @@
 (def xhrm (ajax/map->XhrManager {:headers {"Content-Type" "application/json"
                                            "Accept" "application/json"}}))
 
-(def remoting (state/init-remoting module-configs {:xhrm xhrm}))
+(def remoting (state/init-remoting module-configs {:xhrm xhrm :url (:serverUrl env)}))
 
 (defonce reconciler (state/init-reconciler (merge
                                              app-state

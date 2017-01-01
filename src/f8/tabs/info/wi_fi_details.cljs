@@ -15,7 +15,7 @@
 (declare styles row)
 
 (defui WiFiDetails
-  om/IQuery
+  static om/IQuery
   (query [this]
     [:db/id :config/wifiNetwork :config/wifiPassword])
   Object

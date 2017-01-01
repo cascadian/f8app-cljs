@@ -8,12 +8,13 @@
                            [org.clojure/core.async "0.2.395"
                             :exclusions [org.clojure/tools.reader]]
                            [org.omcljs/om "1.0.0-alpha41" :exclusions [cljsjs/react cljsjs/react-dom]]
-                           [org.routom/routom "0.1.0-alpha9"]
+                           [org.routom/routom "0.1.0-alpha10"]
                            [datascript "0.15.5"]]
 
             :plugins [[lein-cljsbuild "1.1.4"]
                       [lein-figwheel "0.5.8"]
                       [lein-kibit "0.1.3"]]
+  :figwheel {:server-port 3549}
             :clean-targets ["target/" "index.ios.js" "index.android.js"]
             :aliases {"prod-build" ^{:doc "Recompile code with prod profile."}
                                    ["do" "clean"
@@ -36,7 +37,7 @@
                                                                      :output-dir    "target/android"
                                                                      :optimizations :none}}
                                                      {:id           "windows"
-                                                      :source-paths ["src" "env/dev" "checkouts/routom/src"]
+                                                      :source-paths ["src" "env/dev"]
                                                       :figwheel     true
                                                       :compiler     {:output-to     "target/windows/not-used.js"
                                                                      :main          "env.windows.main"

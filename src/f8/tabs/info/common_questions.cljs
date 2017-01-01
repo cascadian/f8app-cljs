@@ -12,9 +12,9 @@
 (def LayoutAnimation (js/require "LayoutAnimation"))
 
 (defui CommonQuestions
-  om/IQuery
+  static om/IQuery
   (query [this]
-    [:db/id :faq/id :faq/question :faq/answer])
+    [:db/id :server/id :faq/question :faq/answer])
   Object
   (render [this]
     (let [{:keys [faqs]} (om/props this)

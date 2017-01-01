@@ -1,7 +1,6 @@
 (ns f8.tabs.info.sends
   (:require-macros [cljs.core.async.macros :refer [go]])
-  (:require [f8.sender :refer [send]]
-            [goog.net.EventType :as EventType]
+  (:require [goog.net.EventType :as EventType]
             [goog.json :as json]
             [routom.graphql :refer [query->graphql]]
             [routom.ajax :refer [send]]
@@ -9,11 +8,10 @@
             [routom.remoting :as r]
             [cljs.core.async :refer [chan <! sliding-buffer]]))
 
-(def ^:private GRAPH-QL-ENDPOINT "http://localhost:8080/graphql")
-
 (defmethod r/start-send-loop :remote/info
-  [_ {:keys [xhrm]}]
-  (let [ch (chan (sliding-buffer 1))]
+  [_ {:keys [xhrm url]}]
+  (let [ch (chan (sliding-buffer 1))
+        endpoint (str url "/graphql")]
     (go
       (loop [[query callback] (<! ch)]
         (let [update-status (fn [status] (callback {:viewer [{:db/ident :viewer :remote/status status}]}))
@@ -44,7 +42,7 @@
               content (json/serialize (clj->js content))
               abort-fn (send xhrm {:content  content
                                         :method   "POST"
-                                        :url      GRAPH-QL-ENDPOINT
+                                        :url      endpoint
                                         :handlers handlers})]
           (callback {:viewer [{:db/ident :viewer :remote/abort-fn abort-fn}]})
           (recur (<! ch)))))

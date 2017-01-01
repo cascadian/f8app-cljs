@@ -30,7 +30,7 @@
 (def links-list (om/factory LinksList {:keyfn :db/id}))
 
 (defui Row
-  om/IQuery
+  static om/IQuery
   (query [this]
     [:db/id :page/id :page/title :page/url :page/logo])
   Object

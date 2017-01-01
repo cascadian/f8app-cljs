@@ -3,7 +3,6 @@
             [routom.parsing :as p]
             [routom.datascript :as rd]
             [routom.remoting :as r]
-            [f8.sender :as s]
             [re-natal.support :as sup]
             [datascript.core :as d]))
 
@@ -38,7 +37,7 @@
             :parser       (-> p/parser
                               (rd/wrap-conn)
                               (p/wrap-ast-filtering #"^remote" #"^ui"))
-            :merge        rd/merge
+            :merge        rd/merge!
             :root-render  sup/root-render
             :root-unmount sup/root-unmount}
            opts)))
