@@ -2,14 +2,12 @@
   (:require [om.next :as om :refer [defui]]
             [f8.common.items-with-separator :refer [items-with-separator]]
             [f8.tabs.info.section :refer [section]]
-            [react-native.api :refer [create-style-sheet]]
+            [react-native.api :refer [create-style-sheet LayoutAnimation]]
             [react-native.components :refer [view]]
             [f8.common.f8-touchable :refer [f8-touchable]]
             [f8.common.f8-text :refer [text]]))
 
 (declare styles row)
-
-(def LayoutAnimation (js/require "LayoutAnimation"))
 
 (defui CommonQuestions
   static om/IQuery

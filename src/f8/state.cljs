@@ -16,7 +16,7 @@
         app-state (atom {:conn         conn
                          :reload-count 0})]
     (d/transact! conn tx-data)
-    {:state app-state}))
+    app-state))
 
 (defn init-remoting [module-configs opts]
   (let [remotes (mapcat #(get % :reconciler/remotes #{}) module-configs)

@@ -1,5 +1,6 @@
-(ns f8.tabs.info.app-module
-  (:require [f8.tabs.info.parser]))
+(ns f8.tabs.info.module-config
+  (:require [f8.tabs.info.parser]
+            [f8.tabs.info.sends]))
 
 (def config
   {:db/data            [{:remote/key    :remote/info

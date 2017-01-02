@@ -13,6 +13,9 @@
 (def Linking (.-Linking ReactNative))
 (def ActionSheetIOS (.-ActionSheetIOS ReactNative))
 (def findNodeHandle (.-findNodeHandle ReactNative))
+(def Clipboard (.-Clipboard ReactNative))
+(def LayoutAnimation (.-LayoutAnimation ReactNative))
+
 
 
 (defn create-style-sheet [m]

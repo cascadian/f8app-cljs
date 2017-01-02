@@ -3,11 +3,11 @@
             [datascript.core :as d]))
 
 
-(defmethod p/read-value :schedule/info-view
+(defmethod p/read-value :ui/info-view
   [{:keys [db query] :as env} key params]
   {:value (d/pull db query [:db/ident key])})
 
-(defmethod p/read-target :schedule/info-view
+(defmethod p/read-target :ui/info-view
   [{:keys [target] :as env} key params]
   (when (= target key)
     (let [{v :value} (p/read-value env key params)]

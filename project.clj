@@ -14,7 +14,7 @@
             :plugins [[lein-cljsbuild "1.1.4"]
                       [lein-figwheel "0.5.8"]
                       [lein-kibit "0.1.3"]]
-  :figwheel {:server-port 3549}
+  :figwheel {:server-port 3449}
             :clean-targets ["target/" "index.ios.js" "index.android.js"]
             :aliases {"prod-build" ^{:doc "Recompile code with prod profile."}
                                    ["do" "clean"

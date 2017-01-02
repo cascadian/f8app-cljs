@@ -1,16 +1,14 @@
 (ns f8.tabs.info.wi-fi-details
   (:require [om.next :as om :refer-macros [defui]]
             [react-native.components :refer [view]]
-            [react-native.api :refer [Platform android? create-style-sheet]]
+            [react-native.android :refer [ToastAndroid]]
+            [react-native.api :refer [Platform android? create-style-sheet Clipboard]]
             [f8.common.items-with-separator :refer [items-with-separator]]
             [f8.tabs.info.section :refer [section]]
             [f8.common.f8-text :refer [text]]
             [f8.common.f8-colors :as colors]
             [f8.common.f8-button :refer [f8-button]]
             ))
-
-(def Clipboard (js/require "Clipboard"))
-(def ToastAndroid (js/require "ToastAndroid"))
 
 (declare styles row)
 

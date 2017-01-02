@@ -9,12 +9,12 @@
             [cljs.core.async :refer [chan <! sliding-buffer]]))
 
 (defmethod r/start-send-loop :remote/info
-  [_ {:keys [xhrm url]}]
+  [target {:keys [xhrm url]}]
   (let [ch (chan (sliding-buffer 1))
         endpoint (str url "/graphql")]
     (go
       (loop [[query callback] (<! ch)]
-        (let [update-status (fn [status] (callback {:viewer [{:db/ident :viewer :remote/status status}]}))
+        (let [update-status (fn [status] (callback {target [{:db/ident :user/viewer :remote/status status}]}))
               _ (update-status :queued)
               success (fn [{:keys [xhrIo]}]
                         (update-status :success)
@@ -31,8 +31,8 @@
                                                       :pages :info/pages
                                                       :config :info/config
                                                       :faqs :info/faqs} json)
-                              tx-data [(assoc json :db/ident :viewer)]]
-                          (callback {:viewer tx-data})))
+                              tx-data [(assoc json :db/ident :user/viewer)]]
+                          (callback {target tx-data})))
               error (fn [{:keys [xhrIo] :as e}]
                       (update-status :error))
               handlers {EventType/READY   #(update-status :ready)
@@ -44,7 +44,7 @@
                                         :method   "POST"
                                         :url      endpoint
                                         :handlers handlers})]
-          (callback {:viewer [{:db/ident :viewer :remote/abort-fn abort-fn}]})
+          (callback {target [{:db/ident :user/viewer :remote/abort-fn abort-fn}]})
           (recur (<! ch)))))
     ch))
 

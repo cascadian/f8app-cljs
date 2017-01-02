@@ -4,7 +4,7 @@
             [react-native.components :refer [view text]]
             [f8.f8-navigator :refer [f8-navigator]]
             [f8.tabs.info.f8-info-view :as info-view]
-            [f8.tabs.info.app-module :as info-module]
+            [f8.tabs.info.module-config :as info-module]
             [routom.ajax :as ajax]
             [f8.env :refer [env]]
             [f8.state :as state])
@@ -23,7 +23,8 @@
     {:info-query (om/get-query info-view/F8InfoView)})
   static om/IQuery
   (query [this]
-    '[{:schedule/info-view ?info-query}])
+    '[{:remote/info [*]}
+      {:ui/info-view ?info-query}])
   Object
   (render [this]
     (view
@@ -60,7 +61,7 @@
 (def remoting (state/init-remoting module-configs {:xhrm xhrm :url (:serverUrl env)}))
 
 (defonce reconciler (state/init-reconciler (merge
-                                             app-state
+                                             {:state app-state}
                                              remoting)))
 
 (defn init []
