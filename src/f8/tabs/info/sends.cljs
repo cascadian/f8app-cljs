@@ -2,6 +2,7 @@
   (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [goog.net.EventType :as EventType]
             [goog.json :as json]
+            [om.next :as om]
             [routom.graphql :refer [query->graphql]]
             [routom.ajax :refer [send]]
             [clojure.walk :refer [prewalk-replace]]
@@ -10,11 +11,15 @@
 
 (defmethod r/start-send-loop :remote/info
   [target {:keys [xhrm url]}]
-  (let [ch (chan (sliding-buffer 1))
+  (let [ch (chan)
         endpoint (str url "/graphql")]
     (go
       (loop [[query callback] (<! ch)]
-        (let [update-status (fn [status] (callback {target [{:db/ident :user/viewer :remote/status status}]}))
+        (let [ast (om/query->ast query)
+              query-keys (mapv :dispatch-key (:children ast))
+              {query* :query} (om/process-roots query)
+              update-status (fn [status] (callback {:keys query-keys
+                                                    :tx-data [{:db/ident :user/viewer :remote/status status}]}))
               _ (update-status :queued)
               success (fn [{:keys [xhrIo]}]
                         (update-status :success)
@@ -32,7 +37,8 @@
                                                       :config :info/config
                                                       :faqs :info/faqs} json)
                               tx-data [(assoc json :db/ident :user/viewer)]]
-                          (callback {target tx-data})))
+                          (callback {:keys query-keys
+                                     :tx-data tx-data})))
               error (fn [{:keys [xhrIo] :as e}]
                       (update-status :error))
               handlers {EventType/READY   #(update-status :ready)

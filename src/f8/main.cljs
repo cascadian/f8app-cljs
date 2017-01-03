@@ -37,7 +37,7 @@
 (def main-config
   {:db/data   [{:db/ident    :app/settings
                 :app/msg          "Hello Clojure in iOS and Android!"}
-               {:db/ident :user/viewer}
+
                {:db/ident   :nav/state
                 :nav/index       0
                 :nav/key-counter 0

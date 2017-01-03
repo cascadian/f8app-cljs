@@ -20,12 +20,10 @@
 (defui F8InfoView
   static om/IQuery
   (query [this]
-    `[
-      :ui.info/title
-      {:ui.info/viewer
-       [^:query-root {:user/viewer [{:info/config ~(om/get-query WiFiDetails)}
-                       {:info/faqs ~(om/get-query CommonQuestions)}
-                       {:info/pages ~(om/get-query Row)}]}]}])
+    `[:ui.info/title
+      ^:query-root {:remote/viewer [{:info/config ~(om/get-query WiFiDetails)}
+                                    {:info/faqs ~(om/get-query CommonQuestions)}
+                                    {:info/pages ~(om/get-query Row)}]}])
   Object
   (render [this]
     (let [{:keys [schedule.info-view/title]} (om/props this)]

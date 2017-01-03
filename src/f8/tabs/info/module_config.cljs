@@ -3,12 +3,13 @@
             [f8.tabs.info.sends]))
 
 (def config
-  {:db/data            [{:remote/key    :remote/info
+  {:db/data            [
+                        {:db/ident :remote/viewer
                          :remote/status :inactive}
                         {:db/ident       :ui/info-view
                          :ui.info/title  "Info"
-                         :ui.info/viewer [:db/ident :user/viewer]}]
-   :db/schema          {:ui.info/viewer      {:db/valueType   :db.type/ref
+                         :remote/viewer [:db/ident :remote/viewer]}]
+   :db/schema          {:remote/viewer      {:db/valueType   :db.type/ref
                                               :db/cardinality :db.cardinality/one}
                         :info/config         {:db/valueType   :db.type/ref
                                               :db/cardinality :db.cardinality/one
